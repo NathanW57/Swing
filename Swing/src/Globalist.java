@@ -368,14 +368,14 @@ public class Globalist extends JDialog {
 
                 int countRawDatabe = 0;
                 try {
-                    countRawDatabe = new GestionMatch().getRawMatchTable();
+                    countRawDatabe = new GestionMatch().getRawMatchTableVainqueur();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
                 String[][] data = new String[countRawDatabe][8];
 
                 try {
-                    listeMatchVainqueur = new GestionMatch().selectAllMatch();
+                    listeMatchVainqueur = new GestionMatch().selectAllMatchVainqueur();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -391,6 +391,7 @@ public class Globalist extends JDialog {
                     data[i][7] = listeMatchVainqueur.get(i).getCodeTournoi();
 
                 }
+                System.out.println(listeMatchVainqueur);
 
                 DefaultTable model = new DefaultTable(data, columns);
                 table1JoueurMatchVainqueur.setModel(model);
@@ -407,7 +408,7 @@ public class Globalist extends JDialog {
 
                 int countRawDatabe = 0;
                 try {
-                    countRawDatabe = new GestionMatch().getRawMatchTable();
+                    countRawDatabe = new GestionMatch().getRawMatchTableFinaliste();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -445,7 +446,7 @@ public class Globalist extends JDialog {
 
                 int countRawDatabe = 0;
                 try {
-                    countRawDatabe = new GestionMatch().getRawMatchTable();
+                    countRawDatabe = new GestionMatch().getRawMatchTableFinaliste();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -482,7 +483,7 @@ public class Globalist extends JDialog {
 
                 int countRawDatabe = 0;
                 try {
-                    countRawDatabe = new GestionMatch().getRawMatchTable();
+                    countRawDatabe = new GestionMatch().getRawMatchTableFinaliste();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -634,7 +635,7 @@ public class Globalist extends JDialog {
 
                 int countRawDatabe = 0;
                 try {
-                    countRawDatabe = new GestionMatch().getRawMatchTable();
+                    countRawDatabe = new GestionMatch().getRawMatchTableVainqueur();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -747,7 +748,7 @@ public class Globalist extends JDialog {
 
                 int countRawDatabe = 0;
                 try {
-                    countRawDatabe = new GestionMatch().getRawMatchTable();
+                    countRawDatabe = new GestionMatch().getRawMatchTableVainqueur();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

@@ -9,12 +9,10 @@ public class GestionMatch {
         connection = ConnectionManager.getConnection();
     }
 
-    public List<JoueurPerso> selectAllMatch() throws SQLException {
-        String queryGetAllMatch = " select * from joueur inner join match_tennis mt on joueur.ID = mt.ID_VAINQUEUR\n" +
-                "inner join epreuve e on mt.ID_EPREUVE = e.ID\n" +
-                "inner join score_vainqueur sv on mt.ID = sv.ID_MATCH\n" +
-                "inner join tournoi on e.ID_TOURNOI = tournoi.ID ORDER BY ANNEE,joueur.NOM ASC";
-        return getJoueurPersos(queryGetAllMatch);
+    public List<JoueurPerso> selectAllMatchVainqueur() throws SQLException {
+        String queryGetAllMatchVainqueur = "select * from joueur inner join match_tennis mt on joueur.ID = mt.ID_VAINQUEUR inner join epreuve e on mt.ID_EPREUVE = e.ID inner join score_vainqueur sv on mt.ID = sv.ID_MATCH\n" +
+                "                inner join tournoi on e.ID_TOURNOI = tournoi.ID ORDER BY ANNEE,joueur.NOM ASC";
+        return getJoueurPersos(queryGetAllMatchVainqueur);
 
     }
 
@@ -103,7 +101,18 @@ public class GestionMatch {
         return listPlayer;
     }
 
-    public int getRawMatchTable() throws SQLException {
+    public int getRawMatchTableVainqueur() throws SQLException {
+        String queryNbRow = " select count(*) as nbRow from joueur inner join match_tennis mt on joueur.ID = mt.ID_VAINQUEUR inner join epreuve e on mt.ID_EPREUVE = e.ID inner join score_vainqueur sv on mt.ID = sv.ID_MATCH\n" +
+        "                inner join tournoi on e.ID_TOURNOI = tournoi.ID ORDER BY ANNEE,joueur.NOM ASC";
+        Statement state = connection.createStatement();
+        ResultSet nbRow = state.executeQuery(queryNbRow);
+
+        nbRow.next();
+
+        return nbRow.getInt("nbRow");
+    }
+
+    public int getRawMatchTableFinaliste() throws SQLException {
         String queryNbRow = " select count(*) as nbRow from joueur inner join match_tennis mt on joueur.ID = mt.ID_FINALISTE\n" +
                 "inner join epreuve e on mt.ID_EPREUVE = e.ID\n" +
                 "inner join score_vainqueur sv on mt.ID = sv.ID_MATCH\n" +
